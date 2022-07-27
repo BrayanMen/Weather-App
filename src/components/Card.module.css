@@ -1,0 +1,52 @@
+.card{
+    border: 1px solid var(--border-color) ;
+    border-radius: 1rem;
+    border-color: transparent;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.74);
+    background-color:#f9c88848;
+    justify-items: center;
+        
+    position: relative;
+    backdrop-filter: blur(4px);
+
+
+    padding: 0.25rem;
+    
+}
+
+
+.cardButton{
+    position: absolute;
+
+    top: 0.25rem;
+    right: 0.25rem;
+    
+    background-color: rgba(255, 0, 0, 0.473); 
+    color: white;
+    border-color: #F98888;
+
+    align-items: center;
+    align-content: center;
+
+    border: 1px solid transparent;
+    border-radius: 9999px;
+}
+
+.cardButton:hover{
+    color: #F98888;
+    background-color: #FDD7D7;
+    border-color: white;
+}
+
+.cardDiv{
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr);
+    margin: 0.25rem;
+    align-items: center;
+    justify-items: center;
+}

@@ -1,0 +1,51 @@
+.search {
+    width: fit-content;
+    height: 2, 5rem;
+    border-radius: 9999px;
+    border: 1px solid;
+    padding: 0.25rem;
+    border-color: var(--border-color);
+}
+
+.input {
+    border: none;
+    border-radius: 9999px;
+    border-color: transparent;
+    width: 30vw;
+    background-color: transparent;
+    color: white;
+    padding: 1px 1.5rem;
+}
+
+.input::placeholder {
+    color: white;
+}
+
+.button {
+    border: none;
+    border-radius: 9999px;
+    border-color: transparent;
+    background-color: var(--border-color);
+    color: white;
+    padding: 2px 1rem;
+
+}
+
+.BsHouse {
+    border: none;
+    border-radius: 9999px;
+    border-color: transparent;
+    background-color: var(--border-color);
+    color: white;
+    padding: 2px 1rem;
+    position: relative;
+    width: fit-content;  
+}
+.nav{
+    width: fit-content;
+    position: relative;
+    display: flex;
+    justify-items: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
