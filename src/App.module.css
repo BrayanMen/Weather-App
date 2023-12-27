@@ -2,12 +2,13 @@
     background-image: url('https://p4.wallpaperbetter.com/wallpaper/299/187/587/mountain-in-rise-weather-wallpaper-preview.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    justify-content: center; 
-    display: grid;  
+    justify-content: center;
+    display: grid;
     height: 100%;
     min-height: 100vh;
     padding: 30px;
-   
+    justify-items: center;
+    align-items: center;
 }
 
 .header{

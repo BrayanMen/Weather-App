@@ -24,7 +24,7 @@ function App() {
           img: recurso.weather[0].icon,
           id: recurso.id,
           wind: recurso.wind.speed,
-          temp: recurso.main.temp,
+          temp:  Math.round(recurso.main.temp),
           name: recurso.name,
           weather: recurso.weather[0].main,
           clouds: recurso.clouds.all,
@@ -41,6 +41,7 @@ function App() {
   function onCLose(id){
     setCities(previousState => previousState.filter(city => city.id !== id))
   }
+
   function onFilter(ciudadId) {
     let ciudad = cities.filter(c => c.id === parseInt(ciudadId));
     if(ciudad.length > 0) {
@@ -57,9 +58,9 @@ function App() {
       <Cards className={style.cards} cities={cities} onClose={onCLose} />
       <Routes>
         <Route exact path='/' element={<Cards/>}></Route>
-      <Route path = '/ciudad/:id' element={<Ciudad/>} render={({match}) => 
-        <Ciudad city = {onFilter(match.params.id)}/>}>
-        </Route>
+      {cities&&(<Route path = '/ciudad/:id' element={<Ciudad/>} render={({match}) => 
+        <Ciudad  city = {onFilter(match.params.id)}/>}>
+        </Route>)}
         </Routes>
     </div>
   );

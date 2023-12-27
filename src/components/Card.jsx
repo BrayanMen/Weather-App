@@ -3,7 +3,7 @@ import style from './Card.module.css';
 import { Link } from 'react-router-dom';
 
 
-export default function Card({max, min, name, img, onClose, id}) {
+export default function Card({max, min,temp , name, img, onClose, id}) {
   
   return (
     <div className={style.card}>
@@ -21,6 +21,10 @@ export default function Card({max, min, name, img, onClose, id}) {
       {max}
       </div>
       <img src={`http://openweathermap.org/img/wn/${img}@2x.png`} alt="Icono" />
+      </div>
+      <div>
+        <h5>Temp</h5>
+      {temp}
       </div>
     </div>
   )

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import style from './Card.module.css';
 
-
-const API_KEY = '6d52a14de0208d6196d773d0941e78c3'
+const API_KEY = '6d52a14de0208d6196d773d0941e78c3';
 
 export default function Ciudad() {
-
-  const [city, setCity] = useState();
+  const [city, setCity] = useState(null);
   const { id } = useParams();
+
+  const onClose = () => setCity(null);
 
   useEffect(() => {
     fetch(
@@ -16,43 +16,64 @@ export default function Ciudad() {
     )
       .then((r) => r.json())
       .then((recurso) => {
-        if (recurso.main !== undefined) {
+        if (recurso.main) {
+          const {
+            main: { temp_min, temp_max, temp, humidity },
+            weather: [{ icon, description, main }],
+            wind: { speed },
+            clouds: { all },
+            coord: { lat, lon },
+            id,
+            name,
+          } = recurso;
+
           const ciudad = {
-            min: Math.round(recurso.main.temp_min),
-            max: Math.round(recurso.main.temp_max),
-            img: recurso.weather[0].icon,
-            descr: recurso.weather[0].description,
-            id: recurso.id,
-            wind: recurso.wind.speed,
-            temp: recurso.main.temp,
-            name: recurso.name,
-            weather: recurso.weather[0].main,
-            clouds: recurso.clouds.all,
-            humidity: recurso.main.humidity,
-            latitud: recurso.coord.lat,
-            longitud: recurso.coord.lon
+            min: Math.round(temp_min),
+            max: Math.round(temp_max),
+            img: icon,
+            descr: description,
+            id,
+            wind: speed,
+            temp:  Math.round(temp - 273.15),
+            name,
+            weather: main,
+            clouds: all,
+            humidity,
+            latitud: lat,
+            longitud: lon,
           };
-          setCity(ciudad)
+
+          setCity(ciudad);
         } else {
-          setCity(null)
+          setCity(null);
         }
+      })
+      .catch((error) => {
+        console.error("Error al cargar la ciudad:", error);
+        setCity(null);
       });
-  }, [id])
+  }, [id]);
 
-  return city === undefined ?
-    (<h1 className={style.card}>Cargando...</h1>) : city === null ?
-      (<h1 className={style.card}>Ciudad no encontrada</h1>) : (
-        <div>
-          <div className={style.card}>
-            <h2>{city.name}</h2>
-            <div>Temperatura: {city.temp} ºC</div>
-            <div>Clima: {city.weather}</div>
-            <div>Viento: {city.wind} km/h</div>
-            <div>Cantidad de nubes: {city.clouds}</div>
-            <div>Latitud: {city.latitud}º</div>
-            <div>Longitud: {city.longitud}º</div>
-          </div>
+  return (
+    <div>
+      {city ? (
+        <div className={style.city}>
+          <button onClick={onClose} className={style.cardButton}>
+            x
+          </button>
+          <h2>{city.name}</h2>
+          <p>Temperatura: {city.temp} ºC</p>
+          <p>Clima: {city.weather}</p>
+          <p>Viento: {city.wind} km/h</p>
+          <p>Cantidad de nubes: {city.clouds}</p>
+          <p>Latitud: {city.latitud}º</p>
+          <p>Longitud: {city.longitud}º</p>
         </div>
-
-      )
-};
+      ) : (
+        <h1 className={style.card}>
+          {city === null ? "Ciudad no encontrada" : "Cargando..."}
+        </h1>
+      )}
+    </div>
+  );
+}
